@@ -17,11 +17,13 @@
 
 - Trying to keep up while collaborating with [Murt](https://github.com/Murt-Awh) (Founder of Pyreworks)  
   
+ 
+- Exploring AI, Data Science and everything in between!
 
 <br/>  
 
 
-## My Skill Set  
+## My Stack
 <table><tr><td valign="top" width="33%">
 
 
@@ -67,7 +69,7 @@
 <br/>  
 
 
-## Connect with me  
+## Contact me!
 <div align="center">
 <a href="https://github.com/bigblackfootman" target="_blank">
 <img src=https://img.shields.io/badge/github-%2324292e.svg?&style=for-the-badge&logo=github&logoColor=white alt=github style="margin-bottom: 5px;" />
@@ -90,13 +92,13 @@
 <br/>  
 
 
-## Github Stats  
+## Github Stats!
 <div align="center"><img src="https://github-readme-stats.vercel.app/api?username=bigblackfootman&show_icons=true&count_private=true&hide_border=true" align="center" /></div>  
 
 <br/>  
 
 
-## One of the bangers i listen to!
+## One of the bangers i listen to :)
 
 <br/>  
 
@@ -113,7 +115,7 @@
 
 
 
-### Show some love!  
+### Show some love! (I love you too!)
 <div align="center">
             <a href="https://www.buymeacoffee.com/https://www.buymeacoffee.com/bigfootdev" target="_blank" style="display: inline-block;">
                 <img
