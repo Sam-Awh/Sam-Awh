@@ -1,7 +1,7 @@
 <div align="center">
-<img src="https://rishavanand.github.io/static/images/greetings.gif" align="center" height="" width="600" />
+<img src="https://i.ibb.co/RzDxWVf/bannr.png" align="center" height="" width="600" />
 </div>  
-  
+
 
 ### <div align="center">Hey! I'm a student as well as a part-time developer!</div>  
   
