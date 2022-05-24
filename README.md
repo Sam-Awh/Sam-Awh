@@ -96,9 +96,7 @@
 <br/>  
 
 
-## Recent Blog Posts  
-None yet.  
-  
+## One of the bangers i listen to!
 
 <br/>  
 
