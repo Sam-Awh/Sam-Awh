@@ -18,7 +18,7 @@
 - Trying to keep up while collaborating with [Murt](https://github.com/Murt-Awh) (Founder of Pyreworks)  
   
  
-- Exploring AI, Data Science and everything in between!
+- Exploring AI, Data Science, everything in between & beyond!
 
 <br/>  
 
