@@ -94,7 +94,10 @@
 
 <br/>  
 
-<div align="center"><img src="https://spotify-github-profile.vercel.app/api/view?uid=c929limzd97u60pyr9hur65m0&cover_image=true&theme=default&bar_color=da76fe" /></div>  
+<div align="center">
+<a href="https://open.spotify.com/user/c929limzd97u60pyr9hur65m0" target="_blank">
+<img src="https://spotify-github-profile.vercel.app/api/view?uid=c929limzd97u60pyr9hur65m0&cover_image=true&theme=default&bar_color=da76fe" /></div>  
+</a>
 
 <br/>  
 
