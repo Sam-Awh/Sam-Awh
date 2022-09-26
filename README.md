@@ -69,7 +69,7 @@
 
 ## Contact me!
 <div align="center">
-<a href="https://github.com/bigblackfootman" target="_blank">
+<a href="https://github.com/Sam-Awh/" target="_blank">
 <img src=https://img.shields.io/badge/github-%2324292e.svg?&style=for-the-badge&logo=github&logoColor=white alt=github style="margin-bottom: 5px;" />
 </a>
 <a href="https://twitter.com/69bigblackfoot1" target="_blank">
