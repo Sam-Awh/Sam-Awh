@@ -15,7 +15,7 @@
 - Hardware enthusiast by night!  
   
 
-- Trying to keep up while collaborating with [Murt](https://github.com/Murt-Awh) (Founder of Pyreworks)  
+- Trying to keep up while collaborating with [Murt](https://github.com/Murt-Awh) (Business Partner & Homie!)  
   
  
 - Exploring AI, Data Science, everything in between & beyond!
