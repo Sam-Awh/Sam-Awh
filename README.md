@@ -163,7 +163,7 @@
 
 ### Show some love! (I love you too!)
 <div align="center">
-            <a href="https://www.buymeacoffee.com/https://www.buymeacoffee.com/bigfootdev" target="_blank" style="display: inline-block;">
+            <a href="https://www.buymeacoffee.com/bigfootdev" target="_blank" style="display: inline-block;">
                 <img
                     src="https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-orange.svg?style=flat-square" 
                     align="center"
