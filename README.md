@@ -6,16 +6,13 @@
 ### <div align="center">Hey! I'm a student as well as a part-time developer!</div>  
   
 
-- 🔭 I’m currently working on [Pyreworks](https://github.com/Murt-Awh/pyreworker)  
+- 🔭 [Pyreworks](https://github.com/Murt-Awh/pyreworker) Currently inactive.  
   
 
 - Learning to unleash the full potential of my stack!  
   
 
 - Hardware enthusiast by night!  
-  
-
-- Trying to keep up while collaborating with [Murt](https://github.com/Murt-Awh) (Business Partner & Homie!)  
   
  
 - Exploring AI, Data Science, everything in between & beyond!
@@ -117,7 +114,7 @@
 <a href="https://github.com/Sam-Awh/" target="_blank">
 <img src=https://img.shields.io/badge/github-%2324292e.svg?&style=for-the-badge&logo=github&logoColor=white alt=github style="margin-bottom: 5px;" />
 </a>
-<a href="https://twitter.com/69bigblackfoot1" target="_blank">
+<a href="https://twitter.com/samcodesthings" target="_blank">
 <img src=https://img.shields.io/badge/twitter-%2300acee.svg?&style=for-the-badge&logo=twitter&logoColor=white alt=twitter style="margin-bottom: 5px;" />
 </a>
 <a href="https://instagram.com/69blackfootman" target="_blank">
