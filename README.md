@@ -24,13 +24,13 @@
 
 <p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=sam-awh&show_icons=true&theme=dark&title_color=ffffff&text_color=ffffff&hide_border=true&locale=en&layout=compact" alt="sam-awh" /></p>
 
-<br/>  
+<br/>
+
+<p>&nbsp;<img align="left" src="https://github-readme-stats.vercel.app/api?username=sam-awh&show_icons=true&theme=dark&title_color=ffffff&text_color=ffffff&hide_border=true&locale=en" alt="Sam-Awh" /></p>
+
+<p><img align="left" src="https://github-readme-streak-stats.herokuapp.com/?user=sam-awh&theme=dark" alt="Sam-Awh" /></p>
 
 <div align="left">
 <a href="https://open.spotify.com/user/c929limzd97u60pyr9hur65m0" target="_blank">
 <img src="https://spotify-github-profile.vercel.app/api/view?uid=c929limzd97u60pyr9hur65m0&cover_image=true&theme=default&bar_color=da76fe" /></div>  
 </a>
-
-<p>&nbsp;<img align="left" src="https://github-readme-stats.vercel.app/api?username=sam-awh&show_icons=true&theme=dark&title_color=ffffff&text_color=ffffff&hide_border=true&locale=en" alt="Sam-Awh" /></p>
-
-<p><img align="left" src="https://github-readme-streak-stats.herokuapp.com/?user=sam-awh&theme=dark" alt="Sam-Awh" /></p>
