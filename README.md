@@ -29,7 +29,7 @@
 <div>
 <a> <img align="center" src="https://github-readme-stats.vercel.app/api?username=sam-awh&show_icons=true&locale=en" /> </a></div>
 
-<div align="center">
+<div>
 <a> <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=sam-awh&" /> </a></div>
 
 <div align="center">
