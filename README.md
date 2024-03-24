@@ -1,3 +1,4 @@
+![Banner](https://i.ibb.co/kxr3cGt/egwergweg.jpg)
 <h1 align="center">I'm sam.</h1>
 <h3 align="center">Who could've guessed?</h3>
 
