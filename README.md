@@ -28,7 +28,7 @@
 
 <h3 align="center">My github stats!</h3>
 <div align="center">
-<a> <img src="https://github-readme-stats.vercel.app/api?username=sam-awh&show_icons=true&theme=dark&title_color=ffffff&text_color=ffffff&hide_border=true&locale=en" /> </a></div>
+<a> <img src="https://github-readme-stats.vercel.app/api?username=sam-awh&show_icons=true&theme=dark&title_color=d573f8&text_color=#d573f8&hide_border=true&locale=en" /> </a></div>
 
 <h3 align="center">My contribution streek!</h3>
 <div align="center">
