@@ -28,7 +28,7 @@
 
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=sam-awh&show_icons=true&locale=en" alt="sam-awh" /></p>
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=sam-awh&" alt="sam-awh" /></p>
+<p> <a> <img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=sam-awh&" alt="sam-awh" /> </a> </p>
 
 <div align="center">
 <a href="https://open.spotify.com/user/c929limzd97u60pyr9hur65m0" target="_blank">
