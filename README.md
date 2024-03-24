@@ -1,6 +1,6 @@
 <p align="center"> <a> <img src="https://i.ibb.co/kxr3cGt/egwergweg.jpg" /><a> </p>
 <h1 align="center">Hi, I'm Saraj</h1>
-<h3 align="center">A fullstack Developer & entrepreneur.</h3>
+<h3 align="center">A Fullstack Developer & Entrepreneur.</h3>
 
 <p align="center"> <a href="https://twitter.com/icookideas" target="blank"><img src="https://img.shields.io/twitter/follow/icookideas?logo=twitter&style=for-the-badge" alt="icookideas" /></a> </p>
 
