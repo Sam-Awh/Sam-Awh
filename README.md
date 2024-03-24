@@ -1,7 +1,6 @@
-![Banner](https://i.ibb.co/kxr3cGt/egwergweg.jpg)
 <h1 align="center">I'm sam.</h1>
 <h3 align="center">Who could've guessed?</h3>
-
+<a href="https://ibb.co/Bt74sf9"><img src="https://i.ibb.co/kxr3cGt/egwergweg.jpg" alt="egwergweg" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'></a>
 - 🔭 I’m currently working on **alot of things!**
 
 - 🌱 I’m currently learning **more and more Rust!**
