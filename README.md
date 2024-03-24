@@ -8,7 +8,7 @@
 
 - 🌱 I’m currently learning **Web development, Rust, TS, Deep Learning, SEO & Marketing**
 
-- 🤝 We're hiring! [https://www.upwork.com/jobs/~0161ecfaa777e54ac6](https://www.upwork.com/jobs/~0161ecfaa777e54ac6)
+- 🤝 We're hiring! [Learn More](https://www.upwork.com/jobs/~0161ecfaa777e54ac6)
 
 - 💬 Ask me about **AWS application deployment, Project Management & More!**
 
