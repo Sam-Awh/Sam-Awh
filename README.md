@@ -1,4 +1,4 @@
-<p align="center"> <a> <img src="https://i.ibb.co/VvBRgf3/Frame-6.png" /><a> </p>
+<p align="center"> <a> <img src="https://i.ibb.co/bKJHZWZ/Frame-6okk.png" /><a> </p>
 <h1 align="center">Hi, I'm Saraj</h1>
 <h3 align="center">A Fullstack Developer & Entrepreneur.</h3>
 
