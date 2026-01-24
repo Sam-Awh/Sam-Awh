@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Saraj Design</title>
+    <!-- Preload Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-color: #333333;
+            --input-bg: #111111;
+            --input-border: #222222;
+            --focus-color: #666666;
+            --font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 500;
+            font-size: 2rem;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: #888;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #aaa;
+            margin-left: 2px;
+        }
+
+        input,
+        textarea {
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 1rem;
+            color: white;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--focus-color);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            margin-top: 1rem;
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-back {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .nav-back a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-back a:hover {
+            color: white;
+        }
+
+        /* Success/Error Messages */
+        #status-message {
+            display: none;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .success {
+            background: rgba(0, 255, 0, 0.1);
+            color: #4ade80;
+            border: 1px solid rgba(0, 255, 0, 0.2);
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Get in touch</h1>
+            <p>Send me a message and I'll get back to you.</p>
+        </header>
+
+        <div id="status-message"></div>
+
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="name@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="How can I help you?" required></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn">Send Message</button>
+        </form>
+
+        <div class="nav-back">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        const statusMsg = document.getElementById('status-message');
+        const submitBtn = document.getElementById('submit-btn');
+        const endpoint = "https://formspree.io/f/xdaejekw";
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // UI State: Loading
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
+            statusMsg.style.display = 'none';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Success
+                    statusMsg.className = 'success';
+                    statusMsg.innerText = "Thanks! Your message has been sent successfully.";
+                    statusMsg.style.display = 'block';
+                    form.reset();
+                } else {
+                    // Error from API
+                    statusMsg.className = 'error';
+                    if (data.errors && data.errors.length > 0) {
+                        statusMsg.innerText = "Error: " + data.errors.map(err => err.message).join(", ");
+                    } else {
+                        statusMsg.innerText = "Oops! There was a problem sending your message.";
+                    }
+                    statusMsg.style.display = 'block';
+                }
+            } catch (error) {
+                // Network Error
+                statusMsg.className = 'error';
+                statusMsg.innerText = "Oops! There was a network problem. Please try again.";
+                statusMsg.style.display = 'block';
+                console.error("Form Error:", error);
+            } finally {
+                // Reset Button
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>
