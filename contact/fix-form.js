@@ -1,65 +1,61 @@
 
 // Fix for Framer Form Submission on Vercel
-// Intercepts the form submission and prevents the default Framer action (which fails).
+// Uses event capturing to intercept submission before Framer sees it.
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Wait a bit for Framer hydration to render the form
-    const checkForForm = setInterval(() => {
-        const forms = document.querySelectorAll("form");
-        if (forms.length > 0) {
-            clearInterval(checkForForm);
-            forms.forEach(form => {
-                // Clone the form to remove existing event listeners attached by Framer
-                const newForm = form.cloneNode(true);
-                form.parentNode.replaceChild(newForm, form);
+(function () {
+    console.log("Fix-form script loaded");
 
-                // Add own event listener
-                newForm.addEventListener("submit", async (e) => {
-                    e.preventDefault();
+    document.addEventListener('submit', async function (e) {
+        // We only care about forms
+        if (e.target.tagName !== 'FORM') return;
 
-                    const submitBtn = newForm.querySelector('button[type="submit"]');
-                    const originalBtnText = submitBtn ? submitBtn.innerText : "Send";
-                    if (submitBtn) {
-                        submitBtn.innerText = "Sending...";
-                        submitBtn.disabled = true;
-                    }
+        console.log("Form submission intercepted via capture phase");
 
-                    // Collect form data
-                    const formData = new FormData(newForm);
+        // Stop Framer from seeing this event
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
 
-                    try {
-                        const response = await fetch("https://formspree.io/f/xdaejekw", {
-                            method: "POST",
-                            body: formData,
-                            headers: {
-                                'Accept': 'application/json'
-                            }
-                        });
+        const form = e.target;
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn ? submitBtn.innerText : "Send";
 
-                        if (response.ok) {
-                            alert("Message sent successfully!");
-                            newForm.reset();
-                        } else {
-                            const data = await response.json();
-                            if (data.errors) {
-                                alert(data.errors.map(error => error.message).join(", "));
-                            } else {
-                                alert("Oops! There was a problem submitting your form");
-                            }
-                        }
-                    } catch (error) {
-                        alert("Oops! There was a problem submitting your form");
-                        console.error(error);
-                    } finally {
-                        if (submitBtn) {
-                            submitBtn.innerText = originalBtnText;
-                            submitBtn.disabled = false;
-                        }
-                    }
-                });
-
-                console.log("Framer form submission intercepted and patched.");
-            });
+        if (submitBtn) {
+            submitBtn.innerText = "Sending...";
+            submitBtn.disabled = true;
         }
-    }, 500); // Check every 500ms
-});
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch("https://formspree.io/f/xdaejekw", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert("Message sent successfully!");
+                form.reset();
+            } else {
+                const data = await response.json();
+                if (data.errors) {
+                    alert(data.errors.map(error => error.message).join(", "));
+                } else {
+                    alert("Oops! There was a problem submitting your form");
+                }
+            }
+        } catch (error) {
+            console.error("Formspree error:", error);
+            alert("Oops! There was a problem submitting your form");
+        } finally {
+            if (submitBtn) {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }
+
+    }, true); // true = Capture phase (happens before bubbling to React handlers)
+})();
