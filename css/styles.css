@@ -15,18 +15,18 @@
     --color-text-muted: rgba(255, 255, 255, 0.5);
     --color-border: rgba(255, 255, 255, 0.15);
     --color-accent: #0099ff;
-    
+
     /* Gradient */
     --gradient-primary: radial-gradient(56% 252% at 78% -52.7%, rgb(136, 0, 255) -140%, rgba(255, 193, 87, 0.88) 100%);
-    
+
     /* Typography */
     --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    
+
     /* Spacing */
     --container-max-width: 1200px;
     --container-tablet: 810px;
     --container-mobile: 390px;
-    
+
     /* Transitions */
     --transition-fast: 0.2s ease;
     --transition-medium: 0.4s ease;
@@ -36,7 +36,9 @@
 /* =====================================================
    Reset & Base Styles
    ===================================================== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -85,7 +87,12 @@ img {
     display: block;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 600;
     line-height: 1.1;
 }
@@ -222,39 +229,72 @@ p {
 .contact-section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     min-height: 100vh;
-    padding: 100px 16px 50px;
-    gap: 40px;
+    padding: 120px 16px 50px;
+    gap: 30px;
     width: 100%;
     max-width: var(--container-max-width);
 }
 
-.contact-header {
-    text-align: center;
+/* Contact Hero / Logo */
+.contact-hero {
+    width: 100%;
 }
 
-.contact-title {
-    font-size: 60px;
-    font-weight: 400;
-    letter-spacing: -0.04em;
+.contact-logo {
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
     line-height: 1em;
-    color: var(--color-text-secondary);
 }
 
-.contact-title strong {
-    font-weight: 700;
+/* Contact Description */
+.contact-description {
+    width: 100%;
+    max-width: 540px;
+}
+
+.contact-description p {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.4em;
     color: var(--color-text-primary);
+}
+
+/* Contact Form Section */
+.contact-form-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.contact-form-title {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1em;
 }
 
 /* Contact Form */
 .contact-form {
     width: 100%;
-    max-width: 600px;
     display: flex;
     flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: flex;
     gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
 }
 
 .form-group {
@@ -269,12 +309,19 @@ p {
     color: var(--color-text-secondary);
 }
 
+.form-label .required {
+    color: var(--color-text-muted);
+}
+
 .form-input,
 .form-textarea {
     background: transparent;
     border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 16px;
+    border-radius: 0;
+    padding: 12px 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
     font-family: var(--font-family);
     font-size: 16px;
     color: var(--color-text-primary);
@@ -293,10 +340,31 @@ p {
 }
 
 .form-textarea {
-    min-height: 150px;
+    min-height: 100px;
     resize: vertical;
 }
 
+/* Outlined Submit Button */
+.form-submit-outlined {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    padding: 16px 32px;
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-top: 10px;
+}
+
+.form-submit-outlined:hover {
+    border-color: var(--color-text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Gradient Submit Button (alternate) */
 .form-submit {
     background-image: var(--gradient-primary);
     border: none;
@@ -468,6 +536,7 @@ p {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -478,6 +547,7 @@ p {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -527,21 +597,27 @@ p {
 
 /* Tablet: 810px - 1199px */
 @media (max-width: 1199px) and (min-width: 810px) {
+
     .container,
     .navbar-container,
     .footer-container,
     .contact-section {
         max-width: var(--container-tablet);
     }
-    
+
     .hero-title {
         font-size: 64px;
     }
-    
-    .contact-title {
-        font-size: 48px;
+
+    /* Contact - Tablet */
+    .contact-logo {
+        font-size: 36px;
     }
-    
+
+    .contact-description p {
+        font-size: 18px;
+    }
+
     .footer-logo {
         font-size: 48px;
     }
@@ -549,67 +625,85 @@ p {
 
 /* Mobile: < 810px */
 @media (max-width: 809px) {
+
     .container,
     .navbar-container,
     .footer-container,
     .contact-section {
         max-width: var(--container-mobile);
     }
-    
+
     /* Navigation */
     .navbar-menu-items {
         display: none;
     }
-    
+
     .navbar-menu-toggle {
         display: block;
     }
-    
+
     .navbar-logo {
         padding-top: 8px;
     }
-    
+
     .navbar-menu {
         padding-top: 10px;
     }
-    
+
     /* Hero */
     .hero {
         padding: 0 20px 50px;
     }
-    
+
     .hero-title {
         font-size: 50px;
     }
-    
+
     /* Contact */
-    .contact-title {
-        font-size: 40px;
+    .contact-section {
+        padding: 100px 20px 50px;
     }
-    
+
+    .contact-logo {
+        font-size: 28px;
+    }
+
+    .contact-description p {
+        font-size: 16px;
+    }
+
+    .contact-form-title {
+        font-size: 22px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
     /* Footer */
     .footer-top {
         flex-direction: column;
         gap: 35px;
     }
-    
+
     .footer-columns {
         flex-direction: row;
         justify-content: space-between;
         gap: 110px;
     }
-    
+
     .footer-bottom {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
     }
-    
+
     .footer-logo {
         font-size: 40px;
         order: 1;
     }
-    
+
     .footer-copyright {
         order: 0;
     }
