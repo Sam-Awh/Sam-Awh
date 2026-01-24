@@ -1,96 +1,123 @@
 
-// Fix for Framer Form Submission on Vercel - Aggressive Interception
-// Intercepts clicks and submits at the window level during the capture phase.
+// Fix for Framer Form Submission on Vercel - Nuclear Option
+// Detects the form button, CLONES and REPLACES it to strip all Framer event listeners.
 
 (function () {
-    console.log("Fix-form script loaded - Aggressive Mode v3");
+    console.log("Fix-form script loaded - Nuclear Mode");
 
     const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdaejekw";
 
-    async function handleFormSubmission(form) {
-        console.log("Handling form submission for:", form);
+    function patchForm(form) {
+        if (form.dataset.patched) return;
+        form.dataset.patched = "true";
 
-        // Find the submit button/element to show loading state
-        // Framer often uses a div or a specific class for the button
-        const submitBtn = form.querySelector('button, [role="button"], input[type="submit"], a[href="#"]');
-        let originalText = "";
+        console.log("Patching form:", form);
 
-        if (submitBtn) {
-            originalText = submitBtn.innerText || submitBtn.value;
-            submitBtn.innerText = "Sending...";
-            submitBtn.value = "Sending...";
-            submitBtn.style.opacity = "0.7";
-            submitBtn.style.pointerEvents = "none";
+        // Find the button. Framer buttons can be tricky.
+        // We look for:
+        // 1. explicit submit buttons
+        // 2. inputs with type submit
+        // 3. elements with text "Send" or "Submit" (case insensitive)
+        // 4. elements with role="button" inside the form
+
+        const candidates = Array.from(form.querySelectorAll('button, input[type="submit"], [role="button"], a, div'));
+
+        const submitBtn = candidates.find(el => {
+            // Check type
+            if (el.getAttribute('type') === 'submit') return true;
+
+            // Check exact text content (trim whitespace)
+            const text = (el.innerText || el.textContent || "").trim().toLowerCase();
+            return text === 'send' || text === 'submit';
+        });
+
+        if (!submitBtn) {
+            console.warn("Could not find a clear Submit/Send button in form", form);
+            return;
         }
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        console.log("Form data collected:", data);
+        console.log("Found submit button:", submitBtn);
 
-        try {
-            const response = await fetch(FORMSPREE_ENDPOINT, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
+        // THE NUCLEAR OPTION: Clone and Replace
+        // This removes ALL event listeners attached by React/Framer
+        const newBtn = submitBtn.cloneNode(true);
+        submitBtn.parentNode.replaceChild(newBtn, submitBtn);
 
-            if (response.ok) {
-                alert("Message sent successfully!");
-                form.reset();
-            } else {
-                const resData = await response.json();
-                if (resData.errors) {
-                    alert("Error: " + resData.errors.map(error => error.message).join(", "));
-                } else {
-                    alert("Oops! There was a problem submitting your form");
-                }
-            }
-        } catch (error) {
-            console.error("Formspree error:", error);
-            alert("Oops! There was a problem submitting your form. Please try again.");
-        } finally {
-            if (submitBtn) {
-                submitBtn.innerText = originalText;
-                submitBtn.value = originalText;
-                submitBtn.style.opacity = "";
-                submitBtn.style.pointerEvents = "";
-            }
-        }
-    }
+        console.log("Replaced submit button with clean clone");
 
-    // Capture SUBMIT events at the window level (highest priority)
-    window.addEventListener('submit', function (e) {
-        console.log("Window 'submit' captured", e.target);
-        if (e.target.tagName === 'FORM') {
+        // Attach our own listener
+        newBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             e.stopPropagation();
-            e.stopImmediatePropagation();
-            handleFormSubmission(e.target);
-        }
-    }, true); // true = Capture phase
 
-    // Capture CLICK events to catch "fake" buttons before Framer sees them
-    window.addEventListener('click', function (e) {
-        // Check if the clicked element is inside a form and looks like a submit trigger
-        const target = e.target;
-        const form = target.closest('form');
+            console.log("Clean button clicked. Submitting to Formspree...");
 
-        if (form) {
-            // Check if it's a submit button or the user clicked something intended to submit
-            const isSubmitButton = target.matches('button[type="submit"], input[type="submit"]');
-            // Also check for Framer specific "button-like" elements if they don't use standard submit types
-            // But simpler is safe: if it's a submit button, we MUST stop it.
+            // UI Feedback
+            const originalText = newBtn.innerText;
+            newBtn.innerText = "Sending...";
+            newBtn.style.opacity = "0.7";
+            newBtn.style.pointerEvents = "none";
 
-            if (isSubmitButton) {
-                console.log("Window 'click' captured on submit button", target);
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                handleFormSubmission(form);
+            // Gather Data
+            const formData = new FormData(form);
+
+            // Debug: Log data
+            console.log("Data:", Object.fromEntries(formData.entries()));
+
+            try {
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    alert("Message sent successfully!");
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    if (data.errors) {
+                        alert("Error: " + data.errors.map(error => error.message).join(", "));
+                    } else {
+                        alert("Oops! There was a problem submitting your form");
+                    }
+                }
+            } catch (error) {
+                console.error("Formspree Error:", error);
+                alert("Oops! There was a problem submitting your form.");
+            } finally {
+                newBtn.innerText = originalText;
+                newBtn.style.opacity = "1";
+                newBtn.style.pointerEvents = "auto";
+            }
+        });
+    }
+
+    // Observer to watch for the form appearing in the DOM
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            for (const node of mutation.addedNodes) {
+                if (node.nodeType === 1) { // Element
+                    if (node.tagName === 'FORM') {
+                        patchForm(node);
+                    } else {
+                        // Check children
+                        const forms = node.querySelectorAll('form');
+                        forms.forEach(patchForm);
+                    }
+                }
             }
         }
-    }, true);
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+    // Initial check in case it's already there
+    document.querySelectorAll('form').forEach(patchForm);
 
 })();
