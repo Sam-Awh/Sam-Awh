@@ -1,67 +1,48 @@
 
-// Fix for Framer Form Submission on Vercel - Nuclear Option
-// Detects the form button, CLONES and REPLACES it to strip all Framer event listeners.
+// Fix for Framer Form Submission on Vercel - Super Nuclear Option
+// Clones and replaces the ENTIRE FORM element to strip all Framer event listeners.
 
 (function () {
-    console.log("Fix-form script loaded - Nuclear Mode");
+    console.log("Fix-form script loaded - Super Nuclear Mode");
 
     const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdaejekw";
 
     function patchForm(form) {
         if (form.dataset.patched) return;
-        form.dataset.patched = "true";
 
-        console.log("Patching form:", form);
+        console.log("Patching form (replacing entire element):", form);
 
-        // Find the button. Framer buttons can be tricky.
-        // We look for:
-        // 1. explicit submit buttons
-        // 2. inputs with type submit
-        // 3. elements with text "Send" or "Submit" (case insensitive)
-        // 4. elements with role="button" inside the form
+        // CLONE THE ENTIRE FORM
+        // This removes ALL event listeners attached by React/Framer to the form and its inputs
+        const newForm = form.cloneNode(true);
+        form.parentNode.replaceChild(newForm, form);
 
-        const candidates = Array.from(form.querySelectorAll('button, input[type="submit"], [role="button"], a, div'));
+        // Mark as patched
+        newForm.dataset.patched = "true";
+        console.log("Form replaced with clean clone");
 
-        const submitBtn = candidates.find(el => {
-            // Check type
-            if (el.getAttribute('type') === 'submit') return true;
-
-            // Check exact text content (trim whitespace)
-            const text = (el.innerText || el.textContent || "").trim().toLowerCase();
-            return text === 'send' || text === 'submit';
-        });
-
-        if (!submitBtn) {
-            console.warn("Could not find a clear Submit/Send button in form", form);
-            return;
-        }
-
-        console.log("Found submit button:", submitBtn);
-
-        // THE NUCLEAR OPTION: Clone and Replace
-        // This removes ALL event listeners attached by React/Framer
-        const newBtn = submitBtn.cloneNode(true);
-        submitBtn.parentNode.replaceChild(newBtn, submitBtn);
-
-        console.log("Replaced submit button with clean clone");
-
-        // Attach our own listener
-        newBtn.addEventListener('click', async (e) => {
+        // Attach our own submit listener
+        newForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             e.stopPropagation();
 
-            console.log("Clean button clicked. Submitting to Formspree...");
+            console.log("Clean form submitted. Sending to Formspree...");
 
-            // UI Feedback
-            const originalText = newBtn.innerText;
-            newBtn.innerText = "Sending...";
-            newBtn.style.opacity = "0.7";
-            newBtn.style.pointerEvents = "none";
+            // Find submit button for UI feedback
+            const submitBtn = newForm.querySelector('button, input[type="submit"], [role="button"]');
+            let originalText = "";
+
+            if (submitBtn) {
+                originalText = submitBtn.innerText || submitBtn.value;
+                submitBtn.innerText = "Sending...";
+                submitBtn.value = "Sending...";
+                submitBtn.style.opacity = "0.7";
+                submitBtn.style.pointerEvents = "none";
+                submitBtn.disabled = true;
+            }
 
             // Gather Data
-            const formData = new FormData(form);
-
-            // Debug: Log data
+            const formData = new FormData(newForm);
             console.log("Data:", Object.fromEntries(formData.entries()));
 
             try {
@@ -75,7 +56,7 @@
 
                 if (response.ok) {
                     alert("Message sent successfully!");
-                    form.reset();
+                    newForm.reset();
                 } else {
                     const data = await response.json();
                     if (data.errors) {
@@ -88,9 +69,13 @@
                 console.error("Formspree Error:", error);
                 alert("Oops! There was a problem submitting your form.");
             } finally {
-                newBtn.innerText = originalText;
-                newBtn.style.opacity = "1";
-                newBtn.style.pointerEvents = "auto";
+                if (submitBtn) {
+                    submitBtn.innerText = originalText;
+                    submitBtn.value = originalText;
+                    submitBtn.style.opacity = "";
+                    submitBtn.style.pointerEvents = "";
+                    submitBtn.disabled = false;
+                }
             }
         });
     }
